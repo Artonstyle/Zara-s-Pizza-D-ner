@@ -1,0 +1,938 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zara's Döner & Pizza – Speisekarte</title>
+<style>
+*{box-sizing:border-box}
+:root{--dark:#202427;--panel:#2b3034;--lime:#d9df4f;--white:#f4f4f6;--muted:#d8d9dc;--line:#9ca0a6}
+body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#3a3d40,#111 55%)}
+.nav{position:sticky;top:0;z-index:5;background:#111d;padding:12px;display:flex;gap:12px;overflow:auto;border-bottom:3px solid var(--lime)}
+.nav a{background:#f0f1f4;color:#111;text-decoration:none;font-weight:900;border-radius:26px;padding:12px 18px;white-space:nowrap;font-size:20px}
+.page{max-width:1120px;margin:auto;padding:14px}
+.hero,.card{background:linear-gradient(#30363a,#1f2427);border:2px solid #474d52;box-shadow:0 12px 35px #0008;position:relative;overflow:hidden}
+.hero:before,.card:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#ffffff22 1px,transparent 1px);background-size:7px 7px;opacity:.18;pointer-events:none}
+.hero>* , .card>*{position:relative}
+.hero{padding:18px}
+.hero-top{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:stretch}
+.hero-left{display:flex;flex-direction:column;gap:14px}
+.logo{background:#f4f5f8;color:#333;margin:0;padding:18px 16px;border-radius:3px;border:2px solid #d9dce2}
+.logo .brand{font-family:Georgia,serif;font-style:italic;font-size:66px;color:#cf8994;letter-spacing:5px}
+.logo .sub{font-weight:800;color:#6b6f78}
+.info{text-align:left;padding:8px 10px 8px 12px}
+.addr{font-size:26px;color:var(--lime);font-weight:900;line-height:1.15}
+.open-title{font-size:28px;font-weight:900;margin:18px 0 10px;color:#f4f4f6}
+.time{font-size:21px;color:var(--lime);font-weight:800;line-height:1.35}
+.time b{color:#f4f4f6}
+.order-line{font-size:22px;font-weight:900;color:#f4f4f6;margin:18px 0 8px}
+.phone{font-size:40px;font-weight:900;margin:8px 0;color:#f4f4f6}
+.wa-icon{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;margin-right:10px;border-radius:50%;background:#25d366;color:#fff;font-size:20px;vertical-align:middle}
+.social{font-size:21px;font-weight:800;color:#f4f4f6;margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.social a{color:#f4f4f6;text-decoration:none}
+.social a:hover{text-decoration:underline}
+.social-icon{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;margin:0 8px 0 0;border-radius:6px;color:#fff;font-size:18px;vertical-align:middle;overflow:hidden}
+.social-icon svg{width:100%;height:100%;display:block}
+.fb-icon{background:#1877f2}
+.hero-right{display:flex;flex-direction:column;gap:12px}
+.delivery{background:#eef0f5;color:#424a55;font-size:23px;font-weight:900;padding:14px 16px;border:3px solid var(--lime);border-radius:3px;line-height:1.4}
+.delivery strong{display:block;font-size:30px;color:#555d69;margin-bottom:4px}
+.hero-art{display:block;width:100%;min-height:250px;object-fit:cover;border-radius:3px;border:2px solid #747a81;background:#1a1d20}
+.offers-top{background:#2b3034;border:1px solid #4b5056;border-radius:8px;padding:12px}
+.offers-top-title{color:var(--lime);font-size:22px;font-weight:900;text-align:center;margin:0 0 10px}
+.offers-strip{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.offer-card{position:relative;flex:0 0 240px;scroll-snap-align:start}
+.offers-strip img{display:block;width:240px;height:auto;border-radius:8px;box-shadow:0 8px 18px #0006}
+.offer-card.offer-active img{border:3px solid #fff;box-shadow:0 8px 18px #0008}
+.offer-badge{position:absolute;right:8px;top:8px;background:#ffffff;color:#111;padding:4px 10px;border-radius:999px;font-size:14px;font-weight:900;letter-spacing:.3px;display:none;animation:offerBlink 1s step-end infinite}
+.offer-card.offer-active .offer-badge{display:block}
+@keyframes offerBlink{
+  0%,100%{opacity:1}
+  50%{opacity:.25}
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:18px;margin-top:18px}
+.head{background:#edf0f4;color:#555d69;padding:8px 14px;border-bottom:3px solid var(--lime);display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:31px;font-weight:900;font-style:italic}
+.head small{font-size:20px;font-style:normal;text-align:center;flex:1}
+.subhead{text-align:center;font-size:22px;font-weight:900;padding:8px;color:#f0f2f6}
+.menu-item{padding:3px 14px 4px 16px}
+.topline{display:grid;grid-template-columns:38px auto minmax(18px,1fr) 72px;align-items:baseline;gap:5px;min-width:0}
+.num{color:#edf0f4;font-size:18px}
+.dish{color:var(--lime);font-size:20px;font-weight:900;white-space:nowrap}
+.dots{border-bottom:2px dotted #d5d8dd99;height:2px;transform:translateY(-4px)}
+.price{color:var(--lime);font-size:21px;font-weight:900;text-align:right;white-space:nowrap}
+.desc{margin-left:38px;color:#e6e7ea;font-size:18px;line-height:1.25;padding-top:1px}
+.menu-photo{display:block;width:100%;max-width:520px;margin:12px auto 14px;border-radius:8px;box-shadow:0 10px 20px #0007}
+.pizza-note{text-align:center;color:var(--lime);font-weight:900;font-size:19px;padding:12px}
+.pizza-note .time-badge{display:inline-block;background:#fff;color:#111;padding:2px 10px;border-radius:999px;margin-right:6px;box-shadow:0 0 10px #ffffff66;font-weight:900}
+.pizza-sizes{display:grid;grid-template-columns:38px minmax(0,1fr) 58px 58px 66px;gap:4px;padding:4px 14px 4px 16px;text-align:center}
+.pizza-sizes b{background:#edf0f4;color:#555d69;padding:3px 2px}
+.pizza-item{display:grid;grid-template-columns:38px minmax(0,1fr) 58px 58px 66px;gap:4px;align-items:baseline;padding:3px 14px 3px 16px;font-size:18px}
+.pizza-item b{color:var(--lime);font-size:20px}
+.pizza-item em{display:block;font-style:normal;color:#e6e7ea;font-size:17px;line-height:1.2}
+.pizza-item strong{color:var(--lime);font-size:20px;text-align:right}
+.party-pizza-photo{display:block;width:100%;max-width:560px;margin:10px auto 14px;border-radius:8px;box-shadow:0 10px 20px #0007}
+.note{text-align:center;font-weight:900;font-size:20px;padding:14px;color:#f1f2f4}
+.offer{display:grid;grid-template-columns:90px 1fr;border-bottom:2px solid #bfc2c7;min-height:76px;align-items:center}
+.offer .pic{font-size:40px;text-align:center;border-right:2px solid var(--lime)}
+.offer .txt{text-align:center;font-size:30px;font-weight:900}
+.offer b{display:block;color:var(--lime);font-size:35px}
+.whitebox{background:#eef0f4;color:#303845;margin:14px;padding:14px;font-size:19px;font-weight:800}
+.flyer-card{padding:14px}
+.flyer-image{display:block;width:100%;max-width:860px;margin:0 auto;border-radius:18px;box-shadow:0 18px 40px #0008}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.footer{text-align:center;padding:30px 10px;color:#ddd}
+.btn{display:inline-block;background:var(--lime);color:#111;text-decoration:none;padding:12px 18px;border-radius:9px;font-weight:900;margin:5px}
+@media(max-width:620px){
+  .page{padding:0}
+  .grid{grid-template-columns:1fr;gap:10px;margin:10px}
+  .hero{padding:10px}
+  .hero-top{grid-template-columns:1fr}
+  .logo .brand{font-size:48px}
+  .addr{font-size:19px}
+  .time{font-size:16px}
+  .phone{font-size:29px}
+  .delivery strong{font-size:24px}
+  .head{font-size:27px;padding:8px 10px}
+  .subhead{font-size:20px}
+  .menu-item{padding:3px 10px}
+  .topline{grid-template-columns:34px auto minmax(10px,1fr) 62px;gap:4px}
+  .num{font-size:17px}
+  .dish{font-size:18px;white-space:normal;line-height:1.12}
+  .price{font-size:20px}
+  .desc{margin-left:34px;font-size:17px}
+  .pizza-item{grid-template-columns:32px minmax(0,1fr) 50px 50px 58px;padding-left:10px;padding-right:10px;font-size:16px}
+  .pizza-sizes{grid-template-columns:32px minmax(0,1fr) 50px 50px 58px;padding-left:14px;padding-right:10px;font-size:16px}
+  .pizza-item b{font-size:17px} .pizza-item em{font-size:15px} .pizza-item strong{font-size:17px}
+  .party-pizza-photo{max-width:100%}
+  .nav a{font-size:18px;padding:10px 16px}
+  .flyer-card{padding:10px}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+<a href="#doener">Döner</a><a href="#pizza">Pizza</a><a href="#getraenke">Getränke</a><a href="#salate">Salate</a><a href="#pide">Pide</a><a href="#falafel">Falafel</a><a href="#angebote">Angebote</a>
+</nav>
+<div class="page">
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-left">
+      <div class="logo"><div class="brand">ZARA'S</div><div class="sub">TURKISH Pizza & Döner</div></div>
+      <div class="info">
+        <div class="addr">Ringstraße 1, 69483 Wald-Michelbach</div>
+        <div class="open-title">Öffnungszeiten</div>
+        <div class="time">Montag bis Freitag<br><b>11:30 - 14:00</b> und <b>17:00 - 21:00</b> Uhr<br>Samstag, Sonntag, Feiertage, Schulferien <b>ab 17:00</b> Uhr<br>Winterzeit Umstellung bis <b>20:00</b> Uhr</div>
+        <div class="order-line">anrufen bestellen abholen</div>
+        <div class="phone">☎ 06207 2267</div>
+        <div class="phone"><span class="wa-icon">☎</span>0152 06446497</div>
+        <div class="social">
+          <div><span class="social-icon fb-icon">f</span><a href="https://www.facebook.com/p/Zaras-D%C3%B6ner-Pizza-100049266318678/" target="_blank" rel="noopener noreferrer">Zara's Döner & Pizza</a></div>
+          <div><span class="social-icon ig-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="ig-g" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="85%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="1" y="1" width="22" height="22" rx="6" fill="url(#ig-g)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="#fff"/></svg></span><a href="https://www.instagram.com/zaras_doner_pizza/" target="_blank" rel="noopener noreferrer">zaras_doner_pizza</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="delivery"><strong>Lieferservice</strong>bis 3 km: Bestellwert ab 15 €<br>bis 6 km: Bestellwert ab 20 €<br>bis 10 km: Bestellwert ab 30 €</div>
+      <img class="hero-art" src="bilder/hero-food.png" alt="Döner, Pizza und Getränke">
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="head"><span>Wochenangebot</span><span></span></div>
+  <div class="offers-top">
+    <div class="offers-strip">
+      <div class="offer-card" data-day="1"><img src="bilder/Montag Wochenangebot.png" alt="Wochenangebot Montag"><span class="offer-badge">Heute</span></div>
+      <div class="offer-card" data-day="2"><img src="bilder/Dienstag Wochenangebot.png" alt="Wochenangebot Dienstag"><span class="offer-badge">Heute</span></div>
+      <div class="offer-card" data-day="3"><img src="bilder/Mittwoch Wochenangebot.png" alt="Wochenangebot Mittwoch"><span class="offer-badge">Heute</span></div>
+      <div class="offer-card" data-day="4"><img src="bilder/Donnerstag Wochenangebot.png" alt="Wochenangebot Donnerstag"><span class="offer-badge">Heute</span></div>
+      <div class="offer-card" data-day="5"><img src="bilder/Freitag Wochenangebot.png" alt="Wochenangebot Freitag"><span class="offer-badge">Heute</span></div>
+      <div class="offer-card" data-day="6"><img src="bilder/Samstag Wochenangebot.png" alt="Wochenangebot Samstag"><span class="offer-badge">Heute</span></div>
+      <div class="offer-card" data-day="0"><img src="bilder/Sonntag Wochenangebot.png" alt="Wochenangebot Sonntag"><span class="offer-badge">Heute</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="grid">
+<section class="card" id="doener"><div class="head"><span>Döner Spezialitäten</span><span>€</span></div><div class="subhead">Hähnchenfleisch Drehspieß</div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">01.</span>
+            <span class="dish">Döner Groß</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">Df, Salat und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">02.</span>
+            <span class="dish">Döner Klein</span>
+            <span class="dots"></span>
+            <span class="price">5,50</span>
+          </div>
+          <div class="desc">Df, Salat und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">03.</span>
+            <span class="dish">Döner Teller</span>
+            <span class="dots"></span>
+            <span class="price">12,00</span>
+          </div>
+          <div class="desc">Df, Salat, Pommes oder Reis und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">04.</span>
+            <span class="dish">Jumbo Teller</span>
+            <span class="dots"></span>
+            <span class="price">12,00</span>
+          </div>
+          <div class="desc">Dönerfleisch mit Pommes oder Reis und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">05.</span>
+            <span class="dish">Gemüse Döner Groß</span>
+            <span class="dots"></span>
+            <span class="price">8,00</span>
+          </div>
+          <div class="desc">mit frittiertem Gemüse, Dönerfleisch</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">06.</span>
+            <span class="dish">Gemüse Döner Klein</span>
+            <span class="dots"></span>
+            <span class="price">6,50</span>
+          </div>
+          <div class="desc">mit frittiertem Gemüse, Dönerfleisch</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">07.</span>
+            <span class="dish">Vegetarischer Gemüse Döner Gr</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">mit frittiertem Gemüse, Weichkäse</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">08.</span>
+            <span class="dish">Vegetarischer Gemüse Döner Kl</span>
+            <span class="dots"></span>
+            <span class="price">6,00</span>
+          </div>
+          <div class="desc">mit frittiertem Gemüse, Weichkäse</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">09.</span>
+            <span class="dish">Vegetarischer Döner Gr</span>
+            <span class="dots"></span>
+            <span class="price">6,00</span>
+          </div>
+          <div class="desc">Salat, Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">10.</span>
+            <span class="dish">Vegetarischer Döner Kl</span>
+            <span class="dots"></span>
+            <span class="price">5,00</span>
+          </div>
+          <div class="desc">Salat, Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">11.</span>
+            <span class="dish">Dürüm Döner</span>
+            <span class="dots"></span>
+            <span class="price">8,00</span>
+          </div>
+          <div class="desc">mit Dönerfleisch, Salat und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">12.</span>
+            <span class="dish">Dürüm Döner</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">Salat und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">13.</span>
+            <span class="dish">Lahmacun</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">mit Salat und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">14.</span>
+            <span class="dish">Lahmacun</span>
+            <span class="dots"></span>
+            <span class="price">8,00</span>
+          </div>
+          <div class="desc">mit Dönerfleisch, Salat und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">15.</span>
+            <span class="dish">Döner Box</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">Dönerfleisch, Pommes</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">16.</span>
+            <span class="dish">Döner Box</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">Dönerfleisch, Salat</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">17.</span>
+            <span class="dish">Döner Box</span>
+            <span class="dots"></span>
+            <span class="price">9,00</span>
+          </div>
+          <div class="desc">Dönerfleisch, Soße</div>
+        </div>
+        <img class="menu-photo" src="bilder/doner-foot2.png" alt="Döner, Pizza und Cola">
+        </section>
+<section class="card pizza" id="pizza"><div class="head"><span>Pizza</span><small>alle Pizzen mit Tomatensoße und Käse</small><span>€</span></div>
+<div class="pizza-note"><span class="time-badge">ab 17:00 Uhr</span>( bei größeren Bestellungen machen wir auch vormittags Pizzen, dafür können Sie uns vorher anrufen )</div>
+<div class="pizza-sizes"><span></span><span></span><b>28 cm</b><b>30 cm</b><b>Party</b></div><div class="pizza-item">
+      <span class="num">18.</span><span><b>Pizza Brot</b><em>m. Tomatensoße und frischer Knoblauch</em></span>
+      <strong>6,00</strong><strong></strong><strong></strong>
+    </div><div class="pizza-item">
+      <span class="num">19.</span><span><b>Margherita</b></span>
+      <strong>7,00</strong><strong>9,00</strong><strong>25,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">20.</span><span><b>Salami</b><em>Rindersalami</em></span>
+      <strong>8,00</strong><strong>10,00</strong><strong>28,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">21.</span><span><b>Schinken</b><em>Putenschinken</em></span>
+      <strong>8,00</strong><strong>10,00</strong><strong>28,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">22.</span><span><b>Peperoniwurst</b><em>Scharfe Rindersalami</em></span>
+      <strong>8,00</strong><strong>10,00</strong><strong>28,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">23.</span><span><b>Zara's</b><em>Dönerfleisch, Peperoni, Soße</em></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">24.</span><span><b>Zara's</b><em>Dönerfleisch, Zwiebeln, Soße</em></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">25.</span><span><b>Funghi</b><em>mit frischen Champignons</em></span>
+      <strong>8,00</strong><strong>10,00</strong><strong>27,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">26.</span><span><b>Jalapenos</b></span>
+      <strong>8,00</strong><strong>10,00</strong><strong>27,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">27.</span><span><b>Hawaii</b><em>Putenschinken, Ananas</em></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">28.</span><span><b>Quattro Formaggi</b><em>4 Käsesorten</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>28,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">29.</span><span><b>Spinat</b><em>Weichkäse, Zwiebeln</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">30.</span><span><b>Artischoken</b><em>Paprika, Zwiebeln</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">31.</span><span><b>Tonno</b><em>Thunfisch, Zwiebeln</em></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">32.</span><span><b>Sardellen</b><em>Paprika, Zwiebeln</em></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">33.</span><span><b>Frutti di Mare</b><em>Kalmarringe, Garnelen</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>31,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">34.</span><span><b>Marina</b><em>Thunfisch, Sardellen, Garnelen</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>31,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">35.</span><span><b>Karibik</b><em>Thunfisch, Sardellen, Ananas</em></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">36.</span><span><b>Vegetarisch 1</b><em>Brokkoli, Pilze, Mais, Zwiebeln, Paprika</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">37.</span><span><b>Vegetarisch 2</b><em>Oliven, Cherrytomaten, Zwiebeln, Mais, Mozzarella</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">38.</span><span><b>Hot</b><em>Knoblauchwurst, Peperoniwurst, Peperoni</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>32,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">39.</span><span><b>Istanbul</b><em>Paprika, Knoblauchwurst, Peperoni, Zwiebeln, Weichkäse</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>32,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">40.</span><span><b>Sucuk</b><em>Knoblauchwurst</em></span>
+      <strong>8,50</strong><strong>10,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">41.</span><span><b>Sucuk Ei</b></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>31,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">42.</span><span><b>Rucola</b><em>Cherrytomaten, Rucola</em></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>29,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">43.</span><span><b>Ägäis</b><em>Oliven, Zwiebeln, Paprika, Peperoni</em></span>
+      <strong>8,50</strong><strong>12,00</strong><strong>32,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">44.</span><span><b>Alaturka</b><em>Paprika, Ei, Knoblauchwurst, Zwiebeln, Pilze</em></span>
+      <strong>9,00</strong><strong>12,00</strong><strong>33,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">45.</span><span><b>Hotdog</b><em>Rindswurst, Käse, Ketchup</em></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">46.</span><span><b>Mozzarella</b><em>Cherrytomaten</em></span>
+      <strong>8,50</strong><strong>11,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">47.</span><span><b>Hollandaise</b><em>Brokkoli, Putenschinken, Hollandaisesoße</em></span>
+      <strong>9,00</strong><strong>12,00</strong><strong>34,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">48.</span><span><b>Hackfleisch</b><em>Zwiebeln</em></span>
+      <strong>8,00</strong><strong>10,00</strong><strong>30,00</strong>
+    </div><div class="pizza-item">
+      <span class="num">49.</span><span><b>Individuell</b><em>Erstellen Sie ihre eigene Pizza mit gewünschten Zutaten ihrer Wahl</em></span>
+      <strong>7,00</strong><strong>9,00</strong><strong>25,00</strong>
+    </div><div class="pizza-item">
+      <span class="num"></span><span><b>Pro Belag</b></span>
+      <strong>0,50</strong><strong>1,00</strong><strong>4,00</strong>
+    </div><img class="party-pizza-photo" src="bilder/Party Pizza.png" alt="Party Pizza"><img class="party-pizza-photo" src="bilder/Calzone.png" alt="Calzone"><div class="note">*Party Pizza 60x40 cm<br>Alle Pizzen sind auch als Calzone erhältlich</div></section>
+<section class="card" id="getraenke"><div class="head"><span>Getränke</span><span>€</span></div><div class="subhead">Preise inkl. Pfand</div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">50.</span>
+            <span class="dish">Cola, Cola Zero, Fanta, Exotic, Mezzo Mix, Eistee, Uludag</span>
+            <span class="dots"></span>
+            <span class="price">2,50</span>
+          </div>
+          <div class="desc">0,33l</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">51.</span>
+            <span class="dish">Ayran</span>
+            <span class="dots"></span>
+            <span class="price">2,00</span>
+          </div>
+          <div class="desc">0,25l</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">52.</span>
+            <span class="dish">Wasser</span>
+            <span class="dots"></span>
+            <span class="price">2,00</span>
+          </div>
+          <div class="desc">0,50l</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">53.</span>
+            <span class="dish">Cola, Cola Zero, Fanta, Exotic, Mezzo Mix, Eistee, Uludag</span>
+            <span class="dots"></span>
+            <span class="price">4,00</span>
+          </div>
+          <div class="desc">1,00l</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">54.</span>
+            <span class="dish">Mineralwasser, Apfelschorle</span>
+            <span class="dots"></span>
+            <span class="price">3,50</span>
+          </div>
+          <div class="desc">1,00l</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">55.</span>
+            <span class="dish">Redbull, Energy Drinks</span>
+            <span class="dots"></span>
+            <span class="price">3,00</span>
+          </div>
+          <div class="desc">0,25l</div>
+        </div></section>
+<section class="card" id="sonstiges"><div class="head"><span>Sonstiges & Burger</span><span>€</span></div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">56.</span>
+            <span class="dish">Portion Pommes Groß</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">57.</span>
+            <span class="dish">Portion Pommes Klein</span>
+            <span class="dots"></span>
+            <span class="price">4,00</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">58.</span>
+            <span class="dish">Portion Kroketten</span>
+            <span class="dots"></span>
+            <span class="price">4,00</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">59.</span>
+            <span class="dish">Portion Weinblätter</span>
+            <span class="dots"></span>
+            <span class="price">6,00</span>
+          </div>
+          <div class="desc">6 Stück</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">60.</span>
+            <span class="dish">Portion Oliven</span>
+            <span class="dots"></span>
+            <span class="price">6,00</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">61.</span>
+            <span class="dish">Portion Peperoni</span>
+            <span class="dots"></span>
+            <span class="price">6,00</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">62.</span>
+            <span class="dish">Onion Rings 6er</span>
+            <span class="dots"></span>
+            <span class="price">5,00</span>
+          </div>
+          <div class="desc">in Teig frittierte Zwiebelringe</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">63.</span>
+            <span class="dish">Onion Rings 12er</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          <div class="desc">in Teig frittierte Zwiebelringe</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">64.</span>
+            <span class="dish">Sigara Böregi 6er</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">frittierte Teigröllchen mit Weichkäse</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">65.</span>
+            <span class="dish">Zara's Crispy Chicken Burger</span>
+            <span class="dots"></span>
+            <span class="price">6,00</span>
+          </div>
+          <div class="desc">im Dönerbrot, Salat, Tomate, Mayonnaise</div>
+        </div></section>
+<section class="card" id="salate"><div class="head"><span>Salate</span><span>€</span></div><div class="subhead">Soße nach Wahl: Joghurtsoße / Knoblauchsoße / Frenchsoße / Essig-Öl Dressing</div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">66.</span>
+            <span class="dish">Gemischter Salat</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">Frische verschiedene Grünsalatblätter, Tomaten, Zwiebeln, Mais, Kraut und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">67.</span>
+            <span class="dish">Bauern Salat</span>
+            <span class="dots"></span>
+            <span class="price">8,00</span>
+          </div>
+          <div class="desc">Frische verschiedene Grünsalatblätter, Gurken, Paprika, Tomaten, Käse und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">68.</span>
+            <span class="dish">Salat Italia</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          <div class="desc">Frische verschiedene Grünsalatblätter, Käse, Oliven, Gurken, Tomaten, Ei, Putenschinken und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">69.</span>
+            <span class="dish">Tonno Salat</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          <div class="desc">Frische verschiedene Grünsalatblätter, Oliven, Thunfisch, grüne Peperoni und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">70.</span>
+            <span class="dish">Zara's Salat</span>
+            <span class="dots"></span>
+            <span class="price">9,00</span>
+          </div>
+          <div class="desc">Gemischter Salat, Dönerfleisch und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">71.</span>
+            <span class="dish">Hawaii Salat</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          <div class="desc">Gemischter Salat, Putenschinken, Ananas, Paprika und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">72.</span>
+            <span class="dish">Kraut und Karottensalat</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">klein mit Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">73.</span>
+            <span class="dish">Fitness Salat</span>
+            <span class="dots"></span>
+            <span class="price">9,00</span>
+          </div>
+          <div class="desc">Frische verschiedene Grünsalatblätter, Putenstreifen, Mais, Zwiebeln, Tomaten, Gurken</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">74.</span>
+            <span class="dish">Kuskus Salat</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          <div class="desc">mit Grünsalatblättern und Weizengrütze (Bulgur)</div>
+        </div></section>
+<section class="card" id="pide"><div class="head"><span>Pide & Gözleme</span><span>€</span></div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">75.</span>
+            <span class="dish">Gözleme</span>
+            <span class="dots"></span>
+            <span class="price">6,00</span>
+          </div>
+          <div class="desc">mit Weichkäse und Petersilien</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">76.</span>
+            <span class="dish">Pide mit Weichkäse</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">77.</span>
+            <span class="dish">Pide mit Dönerfleisch</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">78.</span>
+            <span class="dish">Pide mit Spinat</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">79.</span>
+            <span class="dish">Pide mit Hackfleisch</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">80.</span>
+            <span class="dish">Pide mit Sucuk</span>
+            <span class="dots"></span>
+            <span class="price">8,50</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num"></span>
+            <span class="dish">Pro Belag</span>
+            <span class="dots"></span>
+            <span class="price">1,00</span>
+          </div>
+          
+        </div></section>
+<section class="card" id="nachtisch"><div class="head"><span>Nachtisch</span><span>€</span></div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">81.</span>
+            <span class="dish">Baklava hausgemacht</span>
+            <span class="dots"></span>
+            <span class="price">3,00</span>
+          </div>
+          <div class="desc">3 Stück · dünne Teiglagen, Walnuss, Zuckersirup</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">82.</span>
+            <span class="dish">Kadayif Röllchen hausgemacht</span>
+            <span class="dots"></span>
+            <span class="price">3,00</span>
+          </div>
+          <div class="desc">3 Stück · Engelshaar, Walnuss, Zuckersirup</div>
+        </div></section>
+<section class="card" id="kofte"><div class="head"><span>Köfte & Sucuk</span><span>€</span></div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">83.</span>
+            <span class="dish">Köfte Ekmek Groß</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">Frikadellen im Brot mit Zwiebeln, Petersilie, Tomaten</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">84.</span>
+            <span class="dish">Köfte Ekmek Klein</span>
+            <span class="dots"></span>
+            <span class="price">5,00</span>
+          </div>
+          <div class="desc">Frikadellen im Brot mit Zwiebeln, Petersilie, Tomaten</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">85.</span>
+            <span class="dish">Sucuk Ekmek Groß</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">Knoblauchwurst im Brot mit Zwiebeln, Petersilie, Tomaten</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">86.</span>
+            <span class="dish">Sucuk Ekmek Klein</span>
+            <span class="dots"></span>
+            <span class="price">5,00</span>
+          </div>
+          <div class="desc">Knoblauchwurst im Brot mit Zwiebeln, Petersilie, Tomaten</div>
+        </div></section>
+<section class="card" id="falafel"><div class="head"><span>Falafel</span><span>€</span></div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">87.</span>
+            <span class="dish">Falafel im Brot</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">mit Salat und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">88.</span>
+            <span class="dish">Falafel Dürüm</span>
+            <span class="dots"></span>
+            <span class="price">8,00</span>
+          </div>
+          <div class="desc">mit Salat und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">89.</span>
+            <span class="dish">Falafel Teller</span>
+            <span class="dots"></span>
+            <span class="price">12,00</span>
+          </div>
+          <div class="desc">mit Pommes oder Reis und Salat</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">90.</span>
+            <span class="dish">Falafel Box</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">mit Pommes oder Salat und Soße</div>
+        </div></section>
+<section class="card" id="schnitzel"><div class="head"><span>Hähnchenschnitzel</span><span>€</span></div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">91.</span>
+            <span class="dish">Wiener Schnitzel</span>
+            <span class="dots"></span>
+            <span class="price">11,00</span>
+          </div>
+          <div class="desc">paniert · mit Pommes und Salat</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">92.</span>
+            <span class="dish">Jäger Schnitzel</span>
+            <span class="dots"></span>
+            <span class="price">13,00</span>
+          </div>
+          <div class="desc">paniert · mit Pommes, Salat und Jägersoße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">93.</span>
+            <span class="dish">Parmesan Schnitzel</span>
+            <span class="dots"></span>
+            <span class="price">16,00</span>
+          </div>
+          <div class="desc">paniert · mit Pommes, Salat und Käse-Sahnesoße</div>
+        </div></section>
+<section class="card" id="nuggets"><div class="head"><span>Chicken Nuggets</span><span>€</span></div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">94.</span>
+            <span class="dish">Nuggets Box 5er</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">mit Pommes und Soße</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">95.</span>
+            <span class="dish">Nuggets 7er</span>
+            <span class="dots"></span>
+            <span class="price">8,00</span>
+          </div>
+          <div class="desc">mit Pommes oder Kroketten + Dip</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">96.</span>
+            <span class="dish">Nuggets 10er</span>
+            <span class="dots"></span>
+            <span class="price">10,00</span>
+          </div>
+          <div class="desc">mit Pommes oder Kroketten + Dip</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">97.</span>
+            <span class="dish">Chilli Cheese Nuggets 6er</span>
+            <span class="dots"></span>
+            <span class="price">4,00</span>
+          </div>
+          <div class="desc">Backteig gefüllt mit Käse und Jalapenos</div>
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num">98.</span>
+            <span class="dish">Chilli Cheese Nuggets 12er</span>
+            <span class="dots"></span>
+            <span class="price">7,00</span>
+          </div>
+          <div class="desc">Backteig gefüllt mit Käse und Jalapenos</div>
+        </div></section>
+<section class="card" id="dips"><div class="head"><span>Soßen & Dips</span><span>€</span></div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num"></span>
+            <span class="dish">Ketchup, Mayonnaise, Curry, Süss-Sauer</span>
+            <span class="dots"></span>
+            <span class="price">0,30</span>
+          </div>
+          
+        </div>
+        <div class="menu-item">
+          <div class="topline">
+            <span class="num"></span>
+            <span class="dish">Knoblauchsoße, Joghurtsoße, Chillisoße</span>
+            <span class="dots"></span>
+            <span class="price">1,00</span>
+          </div>
+          
+        </div></section>
+<section class="card flyer-card"><div class="head"><span>Partyservice</span><span></span></div>
+<img class="flyer-image" src="bilder/Partyservice.png" alt="Partyservice">
+</section>
+<section class="card flyer-card"><div class="head"><span>Bezahlen & Bestellen</span><span></span></div>
+<img class="flyer-image" src="bilder/bezahlen-bestellen-flyer.png" alt="Bezahlen und Bestellen Flyer">
+</section>
+</div>
+<footer class="footer"><a class="btn" href="tel:062072267">Jetzt anrufen</a><a class="btn" href="https://wa.me/4915206446497">WhatsApp</a><p>© Zara's Döner & Pizza · Ringstraße 1, 69483 Wald-Michelbach</p></footer>
+</div>
+<script>
+  (function () {
+    var strip = document.querySelector(".offers-strip");
+    if (!strip) return;
+    var today = new Date().getDay();
+    var cards = Array.from(strip.querySelectorAll(".offer-card[data-day]"));
+    cards.forEach(function (card) {
+      card.classList.remove("offer-active");
+    });
+    var order = [1, 2, 3, 4, 5, 6, 0];
+    var startIndex = order.indexOf(today);
+    if (startIndex === -1) return;
+    var rotated = order.slice(startIndex).concat(order.slice(0, startIndex));
+    rotated.forEach(function (day) {
+      var card = cards.find(function (item) {
+        return Number(item.dataset.day) === day;
+      });
+      if (card) strip.appendChild(card);
+    });
+    var active = strip.querySelector('.offer-card[data-day="' + today + '"]');
+    if (!active) return;
+    active.classList.add("offer-active");
+    strip.scrollLeft = 0;
+  })();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
