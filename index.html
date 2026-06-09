@@ -13,6 +13,14 @@ body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,san
 .page{max-width:1120px;margin:auto;padding:14px}
 .hero,.card{background:linear-gradient(#30363a,#1f2427);border:2px solid #474d52;box-shadow:0 12px 35px #0008;position:relative;overflow:hidden}
 .hero:before,.card:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#ffffff22 1px,transparent 1px);background-size:7px 7px;opacity:.18;pointer-events:none}
+.steam-card{background:linear-gradient(#171a1d,#090a0c)}
+.steam-card:after{content:"";position:absolute;inset:0;background:
+radial-gradient(120px 60px at 18% 18%,#ffffff14,transparent 70%),
+radial-gradient(150px 70px at 52% 12%,#ffffff10,transparent 72%),
+radial-gradient(130px 65px at 82% 20%,#ffffff12,transparent 70%),
+radial-gradient(90px 45px at 30% 36%,#ffffff10,transparent 72%),
+radial-gradient(110px 50px at 68% 32%,#ffffff0d,transparent 75%);
+opacity:.9;pointer-events:none}
 .hero>* , .card>*{position:relative}
 .hero{padding:18px}
 .hero-top{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:stretch}
@@ -61,7 +69,8 @@ body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,san
 .desc{margin-left:38px;color:#e6e7ea;font-size:18px;line-height:1.25;padding-top:1px}
 .menu-photo{display:block;width:100%;max-width:520px;margin:12px auto 14px;border-radius:8px;box-shadow:0 10px 20px #0007}
 .pizza-note{text-align:center;color:var(--lime);font-weight:900;font-size:19px;padding:12px}
-.pizza-note .time-badge{display:inline-block;background:#fff;color:#111;padding:2px 10px;border-radius:999px;margin-right:6px;box-shadow:0 0 10px #ffffff66;font-weight:900}
+.pizza-note .time-badge{display:inline-block;background:#fff;color:#111;padding:2px 10px;border-radius:999px;box-shadow:0 0 10px #ffffff66;font-weight:900;margin:0 auto 8px}
+.pizza-note .note-text{display:block}
 .pizza-sizes{display:grid;grid-template-columns:38px minmax(0,1fr) 58px 58px 66px;gap:4px;padding:4px 14px 4px 16px;text-align:center}
 .pizza-sizes b{background:#edf0f4;color:#555d69;padding:3px 2px}
 .pizza-item{display:grid;grid-template-columns:38px minmax(0,1fr) 58px 58px 66px;gap:4px;align-items:baseline;padding:3px 14px 3px 16px;font-size:18px}
@@ -153,7 +162,7 @@ body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,san
 </nav>
 
 <div class="grid">
-<section class="card" id="doener"><div class="head"><span>Döner Spezialitäten</span><span>€</span></div><div class="subhead">Hähnchenfleisch Drehspieß</div>
+<section class="card steam-card" id="doener"><div class="head"><span>Döner Spezialitäten</span><span>€</span></div><div class="subhead">Hähnchenfleisch Drehspieß</div>
         <div class="menu-item">
           <div class="topline">
             <span class="num">01.</span>
@@ -310,7 +319,7 @@ body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,san
         <img class="menu-photo" src="bilder/doner-foot2.png" alt="Döner, Pizza und Cola">
         </section>
 <section class="card pizza" id="pizza"><div class="head"><span>Pizza</span><small>alle Pizzen mit Tomatensoße und Käse</small><span>€</span></div>
-<div class="pizza-note"><span class="time-badge">ab 17:00 Uhr</span>( bei größeren Bestellungen machen wir auch vormittags Pizzen, dafür können Sie uns vorher anrufen )</div>
+<div class="pizza-note"><span class="time-badge">ab 17:00 Uhr</span><span class="note-text">( bei größeren Bestellungen machen wir auch vormittags Pizzen, dafür können Sie uns vorher anrufen )</span></div>
 <div class="pizza-sizes"><span></span><span></span><b>28 cm</b><b>30 cm</b><b>Party</b></div><div class="pizza-item">
       <span class="num">18.</span><span><b>Pizza Brot</b><em>m. Tomatensoße und frischer Knoblauch</em></span>
       <strong>6,00</strong><strong></strong><strong></strong>
