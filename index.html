@@ -8,7 +8,7 @@
 *{box-sizing:border-box}
 :root{--dark:#202427;--panel:#2b3034;--lime:#d9df4f;--white:#f4f4f6;--muted:#d8d9dc;--line:#9ca0a6}
 body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#3a3d40,#111 55%)}
-.nav{position:sticky;top:0;z-index:5;background:#111d;padding:12px;display:flex;gap:12px;overflow:auto;border-bottom:3px solid var(--lime)}
+.nav{background:#111d;padding:12px;display:flex;gap:12px;overflow:auto;border-bottom:3px solid var(--lime);margin:10px 0}
 .nav a{background:#f0f1f4;color:#111;text-decoration:none;font-weight:900;border-radius:26px;padding:12px 18px;white-space:nowrap;font-size:20px}
 .page{max-width:1120px;margin:auto;padding:14px}
 .hero,.card{background:linear-gradient(#30363a,#1f2427);border:2px solid #474d52;box-shadow:0 12px 35px #0008;position:relative;overflow:hidden}
@@ -110,9 +110,6 @@ body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,san
 </style>
 </head>
 <body>
-<nav class="nav">
-<a href="#doener">Döner</a><a href="#pizza">Pizza</a><a href="#getraenke">Getränke</a><a href="#salate">Salate</a><a href="#pide">Pide</a><a href="#falafel">Falafel</a><a href="#angebote">Angebote</a>
-</nav>
 <div class="page">
 <section class="hero">
   <div class="hero-top">
@@ -138,7 +135,7 @@ body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,san
   </div>
 </section>
 
-<section class="card">
+<section class="card" id="angebote">
   <div class="head"><span>Wochenangebot</span><span></span></div>
   <div class="offers-top">
     <div class="offers-strip">
@@ -152,6 +149,10 @@ body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,san
     </div>
   </div>
 </section>
+
+<nav class="nav">
+<a href="#doener">Döner</a><a href="#pizza">Pizza</a><a href="#getraenke">Getränke</a><a href="#salate">Salate</a><a href="#pide">Pide</a><a href="#falafel">Falafel</a><a href="#angebote">Angebote</a>
+</nav>
 
 <div class="grid">
 <section class="card" id="doener"><div class="head"><span>Döner Spezialitäten</span><span>€</span></div><div class="subhead">Hähnchenfleisch Drehspieß</div>
@@ -926,6 +927,8 @@ body{margin:0;background:#111;color:var(--white);font-family:Arial,Helvetica,san
 </script>
 </body>
 </html>
+
+
 
 
 
